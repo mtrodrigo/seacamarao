@@ -33,13 +33,19 @@ export const Header = () => {
   const isMenuOpen = Boolean(anchorEl);
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#1e293b", boxShadow: 4 }}>
+    <AppBar position="static" sx={{ backgroundColor: "#27272a", boxShadow: 4 }}>
       <Toolbar sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
         <Box sx={{ display: "flex", maxWidth: 1152, width: "100%", alignItems: "center", justifyContent: "space-between" }}>
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <img src={logo} alt="Logo Sea Camarão" className="max-w-20" />
-            <img src={logo_text} alt="Texto Logo" className="max-w-48" />
-          </Box>
+            <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: { xs: 1, sm: 2 },
+            }}
+            >
+            <img src={logo} alt="Logo Sea Camarão" className="max-w-10 sm:max-w-20" />
+            <img src={logo_text} alt="Texto Logo" className="max-w-40 sm:max-w-48"/>
+            </Box>
           <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 3, alignItems: "center" }}>
             <HeaderBottom to="#" text="Login" />
             <HeaderBottom to="#" text="Produtos" />
@@ -82,7 +88,7 @@ export const Header = () => {
                 <HeaderBottom to="#" text="Login" />
               </MenuItem>
               <MenuItem onClick={handleMenuClose}>
-                <HeaderBottom to="#" text="Produtos" />
+                <HeaderBottom to="/" text="Produtos" />
               </MenuItem>
               <MenuItem onClick={handleMenuClose}>
                 <HeaderBottom to="#" text="Sobre" />

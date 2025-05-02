@@ -1,7 +1,7 @@
 
 export const Footer = () => {
     return(
-        <footer className="w-full bg-zinc-900 flex-col items-center justify-center text-center">
+        <footer className="w-full bg-zinc-800 flex-col items-center justify-center text-center">
             <section className="flex items-center justify-center mt-2">
                 <div className="flex items-center justify-center gap-5">
                     <a href="https://www.instagram.com/seacamarao/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -15,8 +15,9 @@ export const Footer = () => {
                     </a>
                 </div>
             </section>
-            <section>
-                <p className="text-zinc-200 mb-3">&copy; {new Date().getFullYear()} Sea Camarão. Todos od direitos reservados.</p>
+            <section className="mb-6 sm:mb-2">
+                <p className="text-zinc-200 text-center">&copy; {new Date().getFullYear()} Sea Camarão. Todos od direitos reservados.</p>
+                <p className="text-zinc-200 text-center">Criador por <a className="text-orange-600" href="https://wa.me/5535984061841" target="_blank" rel="noopener noreferrer">Rodrigo Marques Tavares</a></p>
             </section>
         </footer>
     )
