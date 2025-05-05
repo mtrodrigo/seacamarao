@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import api from "../../utils/api";
 import { CircularProgress } from "@mui/material";
 import Productscontainer from "../../components/containers/Productscontainer";
 import { ProductCard } from "../../components/cards/ProductCard";
+import { CartContext } from "../../contexts/CartContext";
 
 export interface ProductsProps {
   _id: string;
@@ -16,18 +17,23 @@ export interface ProductsProps {
 const Home = () => {
   const [products, setProducts] = useState<ProductsProps[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const { addItemCart } = useContext(CartContext);
 
   useEffect(() => {
     api
       .get("/products/")
       .then((response) => {
         setProducts(response.data);
-        setLoading(false)
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error: ", error);
       });
   }, []);
+
+  const handleAddItem = (product: ProductsProps) => {
+    addItemCart(product)
+  };
 
   if (loading) {
     return <CircularProgress style={{ color: "#e4e4e7" }} size={40} />;
@@ -42,6 +48,7 @@ const Home = () => {
             src={product.image}
             name={product.name}
             price={product.price}
+            onClick={() => handleAddItem(product)}
             to={`/details/${product._id}`}
           />
         ))}

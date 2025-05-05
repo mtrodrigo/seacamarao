@@ -23,7 +23,7 @@ interface CartProviderProps {
   children: ReactNode;
 }
 
-const CartContext = createContext({} as CartContextData);
+export const CartContext = createContext({} as CartContextData);
 
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState<CartProps[]>([]);

@@ -1,17 +1,22 @@
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps {
   src: string;
   name: string;
   price: number;
   to: string;
+  onClick: () => void;
 }
 
-export const ProductCard = ({ src, name, price, to }: ProductCardProps) => {
-  const navigate = useNavigate();
+export const ProductCard = ({
+  src,
+  name,
+  price,
+  to,
+  onClick,
+}: ProductCardProps) => {
   return (
     <section className="w-full p-3 bg-zinc-700 rounded-md drop-shadow-2xl">
       <img className="w-full" src={src} alt={name} />
@@ -32,7 +37,7 @@ export const ProductCard = ({ src, name, price, to }: ProductCardProps) => {
           Mais detalhes...
         </Link>
         <Button
-          onClick={() => navigate("/")}
+          onClick={onClick}
           variant="outlined"
           startIcon={<ShoppingCartIcon />}
           sx={{
