@@ -19,7 +19,7 @@ export const ProductCardDetail = ({
   const navigate = useNavigate();
 
   return (
-    <section className="max-w-5xl w-full p-3 bg-zinc-700 rounded-md drop-shadow-2xl">
+    <section className="max-w-5xl w-full p-3 bg-zinc-700 rounded-md drop-shadow-2xl my-3 mx-2 md:mx-0">
       <Button
         onClick={() => navigate("/")}
         variant="outlined"
@@ -39,7 +39,7 @@ export const ProductCardDetail = ({
         {name}
       </h2>
       <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-        <img className="w-5/10 rounded-md" src={src} alt={name} />
+        <img className="w-7/10 sm:w-5/10 rounded-md" src={src} alt={name} />
         <div>
           <p className="text-zinc-200 text-justify mb-3">{description}</p>
           <span className="text-orange-600 font-semibold mb-5">

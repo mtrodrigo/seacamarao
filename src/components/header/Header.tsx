@@ -47,9 +47,9 @@ export const Header = () => {
             <img src={logo_text} alt="Texto Logo" className="max-w-40 sm:max-w-48"/>
             </Box>
           <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 3, alignItems: "center" }}>
-            <HeaderBottom to="#" text="Login" />
-            <HeaderBottom to="#" text="Produtos" />
-            <HeaderBottom to="#" text="Sobre" />
+            <HeaderBottom to="/login" text="Login" />
+            <HeaderBottom to="/" text="Produtos" />
+            <HeaderBottom to="/about" text="Sobre" />
             <IconButton color="inherit" aria-label="carrinho de compras" onClick={toggleCart(true)}>
               <Badge badgeContent={3} color="error">
                 <ShoppingCartIcon />

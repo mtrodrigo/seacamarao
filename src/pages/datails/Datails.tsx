@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../utils/api";
 import { CircularProgress } from "@mui/material";
-import Productscontainer from "../../components/containers/Productscontainer";
 import { ProductCardDetail } from "../../components/cards/ProductCardDetail";
 import { useParams } from "react-router-dom";
 import { ProductsProps } from "../home/Home";
@@ -27,14 +26,12 @@ const Details = () => {
     }
 
     return(
-        <Productscontainer>
             <ProductCardDetail 
                 src={product?.image || ""}
                 name={product?.name || ""}
                 price={typeof product?.price === "number" ? product.price : parseFloat(product?.price || "0")}
                 description={product?.description || ""}
             />
-        </Productscontainer>
     )
 }
 
