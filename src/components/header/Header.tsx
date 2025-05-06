@@ -14,11 +14,13 @@ import logo from "../../assets/logo.png";
 import logo_text from "../../assets/logo_text.png";
 import { HeaderBottom } from "../buttons/HeaderBottom";
 import { CartContext } from "../../contexts/CartContext";
+import { Context } from "../../contexts/UserContext";
 
 export const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { cartAmount, cart, total } = useContext(CartContext);
+  const { authenticated, logout } = useContext(Context);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -73,9 +75,13 @@ export const Header = () => {
               alignItems: "center",
             }}
           >
-            <HeaderBottom to="/login" text="Login" />
             <HeaderBottom to="/" text="Produtos" />
             <HeaderBottom to="/about" text="Sobre" />
+            {authenticated ? (
+              <HeaderBottom to="#" onClick={logout} text="Sair" />
+            ) : (
+              <HeaderBottom to="/login" text="Login" />
+            )}
             <IconButton
               color="inherit"
               aria-label="carrinho de compras"
@@ -116,14 +122,19 @@ export const Header = () => {
                 },
               }}
             >
-              <MenuItem onClick={handleMenuClose}>
-                <HeaderBottom to="#" text="Login" />
-              </MenuItem>
+              <MenuItem onClick={handleMenuClose}>{}</MenuItem>
               <MenuItem onClick={handleMenuClose}>
                 <HeaderBottom to="/" text="Produtos" />
               </MenuItem>
               <MenuItem onClick={handleMenuClose}>
-                <HeaderBottom to="#" text="Sobre" />
+                <HeaderBottom to="/about" text="Sobre" />
+              </MenuItem>
+              <MenuItem>
+                {authenticated ? (
+                  <HeaderBottom to="#" onClick={logout} text="Sair" />
+                ) : (
+                  <HeaderBottom to="/login" text="Login" />
+                )}
               </MenuItem>
             </Menu>
             <IconButton

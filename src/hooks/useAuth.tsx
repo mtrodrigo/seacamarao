@@ -43,7 +43,7 @@ export default function useAuth() {
       });
       await authUser(data);
       toast.success(msgText);
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       if (
         error instanceof Error &&
@@ -54,7 +54,7 @@ export default function useAuth() {
         msgText = (error as any).response.data.message;
         toast.error(msgText);
       } else {
-        msgText = "Erro ao realizar login";
+        msgText = "Usuário ou senha incorreto";
         toast.error(msgText);
         console.error("Error:", error);
       }
