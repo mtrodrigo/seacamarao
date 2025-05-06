@@ -6,6 +6,7 @@ import About from "./pages/about/About"
 import Login from "./pages/login/Login"
 import Register from "./pages/login/Register"
 import Cart from "./pages/cart/Cart"
+import Dashboard from "./pages/restricted/Dashboard"
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/restricted/dashboard" element={<Dashboard />} />
         </Route>
       </Routes>
     </Router>

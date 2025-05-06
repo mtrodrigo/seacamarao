@@ -58,7 +58,7 @@ const Cart = () => {
                     </button>
                   </td>
                   <td className="py-4">
-                    {product.price.toLocaleString("pt-BR", {
+                    {(product.price * product.quantity).toLocaleString("pt-BR", {
                       style: "currency",
                       currency: "BRL",
                     })}
