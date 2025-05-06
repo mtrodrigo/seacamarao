@@ -37,7 +37,7 @@ const Cart = () => {
                     />
                   </td>
                   <td className="py-4">{product.name}</td>
-                  <td className="py-4">
+                  <td className="flex items-center justify-center gap-3 py-4">
                     <button onClick={() => removeItemCart(product)}>
                       <RemoveIcon />
                     </button>
@@ -67,6 +67,12 @@ const Cart = () => {
               ))}
             </tbody>
           </table>
+         {cartAmount > 0 && (
+           <div className="flex items-center gap-10 justify-end text-zinc-200 font-bold mx-5">
+            <span>TOTAL</span>
+            <span>{total}</span>
+           </div>
+         )}
           <div className="flex items-center justify-center gap-16 my-10">
             <HeaderBottom to="/" text="Continuar comprando" />
             <HeaderBottom to="/" text="Finalizar compra" />

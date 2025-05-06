@@ -27,18 +27,14 @@ interface CartProviderProps {
 export const CartContext = createContext({} as CartContextData);
 
 export const CartProvider = ({ children }: CartProviderProps) => {
-  const [cart, setCart] = useState<CartProps[]>([]);
+  const [cart, setCart] = useState<CartProps[]>(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
   const [total, setTotal] = useState("");
 
   useEffect(() => {
-    const savedCart = localStorage.getItem('cart');
-    if (savedCart) {
-      setCart(JSON.parse(savedCart));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(cart));
     totalResultCart(cart);
   }, [cart]);
 
@@ -46,15 +42,17 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     const indexItem = cart.findIndex((item) => item.id === newItem._id);
 
     if (indexItem !== -1) {
-      let cartList = [...cart];
-      cartList[indexItem].quantity = cartList[indexItem].quantity + 1;
-      cartList[indexItem].total =
-        cartList[indexItem].price * cartList[indexItem].quantity;
+      const cartList = [...cart];
+      cartList[indexItem] = {
+        ...cartList[indexItem],
+        quantity: cartList[indexItem].quantity + 1,
+        total: cartList[indexItem].price * (cartList[indexItem].quantity + 1),
+      };
       setCart(cartList);
-      totalResultCart(cartList);
       return;
     }
-    let data = {
+
+    const data: CartProps = {
       id: newItem._id,
       name: newItem.name,
       code: newItem.code,
@@ -64,36 +62,34 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       total: newItem.price,
     };
     setCart((products) => [...products, data]);
-    totalResultCart([...cart, data]);
   };
 
   const removeItemCart = (product: CartProps) => {
     const indexItem = cart.findIndex((item) => item.id === product.id);
 
     if (cart[indexItem]?.quantity > 1) {
-      let cartList = [...cart];
-      cartList[indexItem].quantity = cartList[indexItem].quantity - 1;
-      cartList[indexItem].total =
-        cartList[indexItem].total - cartList[indexItem].price;
+      const cartList = [...cart];
+      cartList[indexItem] = {
+        ...cartList[indexItem],
+        quantity: cartList[indexItem].quantity - 1,
+        total: cartList[indexItem].total - cartList[indexItem].price,
+      };
       setCart(cartList);
-      totalResultCart(cartList);
       return;
     }
+
     const removeItem = cart.filter((item) => item.id !== product.id);
     setCart(removeItem);
-    totalResultCart(removeItem);
   };
 
   const totalResultCart = (items: CartProps[]) => {
-    let myCart = items;
-    let result = myCart.reduce((acc, obj) => {
-      return acc + obj.total;
-    }, 0);
-    const resultFormated = result.toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    });
-    setTotal(resultFormated);
+    const result = items.reduce((acc, obj) => acc + obj.total, 0);
+    setTotal(
+      result.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      })
+    );
   };
 
   return (
