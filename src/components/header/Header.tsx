@@ -18,7 +18,7 @@ import { CartContext } from "../../contexts/CartContext";
 export const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const { cartAmount } = useContext(CartContext);
+  const { cartAmount, cart, total } = useContext(CartContext);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -146,18 +146,42 @@ export const Header = () => {
           "& .MuiDrawer-paper": {
             backgroundColor: "#1e293b",
             color: "white",
-            width: 300,
+            width: 400,
           },
         }}
       >
         <Box sx={{ padding: 2 }}>
-          <Typography variant="h6" sx={{ marginBottom: 2 }}>
-            Carrinho de Compras
-          </Typography>
-          <Typography>Item 1 - R$ 10,00</Typography>
-          <Typography>Item 2 - R$ 20,00</Typography>
-          <Typography sx={{ marginBottom: 2 }}>Item 3 - R$ 30,00</Typography>
-          <HeaderBottom to="#" text="Finalizar compra" />
+          {cartAmount === 0 ? (
+            <>
+              <p className="my-8">Carrinho vazio</p>
+              <HeaderBottom
+                to="#"
+                text="Continuar comprando"
+                onClick={toggleCart(false)}
+              />
+            </>
+          ) : (
+            <>
+              <Typography variant="h6" sx={{ marginBottom: 2 }}>
+                Carrinho de Compras
+              </Typography>
+              {cart.map((item) => (
+                <Typography key={item.id}>
+                  {item.quantity}un - {item.name} -{" "}
+                  {item.price.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </Typography>
+              ))}
+              <Typography sx={{ marginBlock: 3 }}>TOTAL: {total}</Typography>
+              <HeaderBottom
+                to="/cart"
+                onClick={toggleCart(false)}
+                text="Finalizar compra"
+              />
+            </>
+          )}
         </Box>
       </Drawer>
     </AppBar>

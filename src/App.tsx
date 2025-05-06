@@ -5,6 +5,7 @@ import Details from "./pages/datails/Datails"
 import About from "./pages/about/About"
 import Login from "./pages/login/Login"
 import Register from "./pages/login/Register"
+import Cart from "./pages/cart/Cart"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/cart" element={<Cart />} />
         </Route>
       </Routes>
     </Router>

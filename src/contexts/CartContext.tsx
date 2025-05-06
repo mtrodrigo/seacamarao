@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { ProductsProps } from "../pages/home/Home";
 
 interface CartContextData {
@@ -17,6 +17,7 @@ interface CartProps {
   price: number;
   quantity: number;
   total: number;
+  description?: string;
 }
 
 interface CartProviderProps {
@@ -29,11 +30,23 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState<CartProps[]>([]);
   const [total, setTotal] = useState("");
 
+  useEffect(() => {
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+      setCart(JSON.parse(savedCart));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    totalResultCart(cart);
+  }, [cart]);
+
   const addItemCart = (newItem: ProductsProps) => {
     const indexItem = cart.findIndex((item) => item.id === newItem._id);
 
     if (indexItem !== -1) {
-      let cartList = cart;
+      let cartList = [...cart];
       cartList[indexItem].quantity = cartList[indexItem].quantity + 1;
       cartList[indexItem].total =
         cartList[indexItem].price * cartList[indexItem].quantity;
@@ -58,7 +71,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     const indexItem = cart.findIndex((item) => item.id === product.id);
 
     if (cart[indexItem]?.quantity > 1) {
-      let cartList = cart;
+      let cartList = [...cart];
       cartList[indexItem].quantity = cartList[indexItem].quantity - 1;
       cartList[indexItem].total =
         cartList[indexItem].total - cartList[indexItem].price;
