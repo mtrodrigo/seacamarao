@@ -4,6 +4,7 @@ import { CircularProgress } from "@mui/material";
 import Productscontainer from "../../components/containers/Productscontainer";
 import { ProductCard } from "../../components/cards/ProductCard";
 import { CartContext } from "../../contexts/CartContext";
+import toast from "react-hot-toast";
 
 export interface ProductsProps {
   _id: string;
@@ -33,6 +34,7 @@ const Home = () => {
 
   const handleAddItem = (product: ProductsProps) => {
     addItemCart(product)
+    toast.success("Produto adicionado com sucesso")
   };
 
   if (loading) {

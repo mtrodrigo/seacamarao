@@ -8,6 +8,7 @@ interface ProductCardProps {
   name: string;
   price: number;
   description?: string;
+  onClick?: () => void;
 }
 
 export const ProductCardDetail = ({
@@ -15,8 +16,9 @@ export const ProductCardDetail = ({
   name,
   price,
   description,
+  onClick,
 }: ProductCardProps) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <section className="max-w-5xl w-full p-3 bg-zinc-700 rounded-md drop-shadow-2xl my-3 mx-2 md:mx-0">
@@ -51,7 +53,7 @@ export const ProductCardDetail = ({
           </span>
           <div className="flex items-center justify-end mt-5">
             <Button
-              onClick={() => navigate("/")}
+              onClick={onClick}
               variant="outlined"
               startIcon={<ShoppingCartIcon />}
               sx={{

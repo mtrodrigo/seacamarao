@@ -28,7 +28,7 @@ const Cart = () => {
             </thead>
             <tbody>
               {cart.map((product) => (
-                <tr className="text-center border-b border-zinc-700">
+                <tr key={product.id} className="text-center border-b border-zinc-700">
                   <td className="flex items-center justify-center py-4">
                     <img
                       className="w-12"
