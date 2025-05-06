@@ -15,12 +15,16 @@ import logo_text from "../../assets/logo_text.png";
 import { HeaderBottom } from "../buttons/HeaderBottom";
 import { CartContext } from "../../contexts/CartContext";
 import { Context } from "../../contexts/UserContext";
+import useAuth from "../../hooks/useAuth";
+import SettingsIcon from "@mui/icons-material/Settings";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { cartAmount, cart, total } = useContext(CartContext);
   const { authenticated, logout } = useContext(Context);
+  const { isAdmin } = useAuth();
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -82,15 +86,23 @@ export const Header = () => {
             ) : (
               <HeaderBottom to="/login" text="Login" />
             )}
-            <IconButton
-              color="inherit"
-              aria-label="carrinho de compras"
-              onClick={toggleCart(true)}
-            >
-              <Badge badgeContent={cartAmount} color="error">
-                <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
+            {isAdmin ? (
+              <Link to="/restricted/dashboard" style={{ color: "inherit" }}>
+                <IconButton color="inherit" aria-label="admin-dashboard">
+                  <SettingsIcon />
+                </IconButton>
+              </Link>
+            ) : (
+              <IconButton
+                color="inherit"
+                aria-label="carrinho de compras"
+                onClick={toggleCart(true)}
+              >
+                <Badge badgeContent={cartAmount} color="error">
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
+            )}
           </Box>
           <Box
             sx={{ display: { xs: "flex", sm: "none" }, alignItems: "center" }}
@@ -149,6 +161,7 @@ export const Header = () => {
           </Box>
         </Box>
       </Toolbar>
+
       <Drawer
         anchor="right"
         open={isCartOpen}

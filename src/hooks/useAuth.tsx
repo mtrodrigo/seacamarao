@@ -13,7 +13,7 @@ interface AuthUserProps {
 interface DecodedToken {
   userId: string;
   email: string;
-  role: string;
+  administrator: boolean;
   exp: number;
   iat: number;
 }
@@ -21,55 +21,52 @@ interface DecodedToken {
 export default function useAuth() {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const [userRole, setUserRole] = useState<string>("user");
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  const getAdminStatusFromToken = (token: string | null): boolean => {
+    if (!token) return false;
+    try {
+      const parsedToken = JSON.parse(token);
+      const decoded = jwtDecode<DecodedToken>(parsedToken);
+      return decoded.administrator || false;
+    } catch (error) {
+      console.error("Error decoding token:", error);
+      return false;
+    }
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("seacamarao-token");
-
+    const adminStatus = getAdminStatusFromToken(token);
+    
     if (token) {
       const parsedToken = JSON.parse(token);
       api.defaults.headers.Authorization = `Bearer ${parsedToken}`;
       setAuthenticated(true);
-
-      try {
-        const decoded = jwtDecode<DecodedToken>(parsedToken);
-        setUserRole(decoded.role);
-      } catch (error) {
-        console.error("Erro ao decodificar token:", error);
-        setUserRole("user");
-      }
+      setIsAdmin(adminStatus); // Atualiza o estado imediatamente
     } else {
       setAuthenticated(false);
-      setUserRole("user");
+      setIsAdmin(false);
     }
     setLoading(false);
   }, []);
-
-  const authUser = async (data: AuthUserProps) => {
-    if (data.token) {
-      localStorage.setItem("seacamarao-token", JSON.stringify(data.token));
-      api.defaults.headers.Authorization = `Bearer ${data.token}`;
-      setAuthenticated(true);
-      
-      try {
-        const decoded = jwtDecode<DecodedToken>(data.token);
-        setUserRole(decoded.role);
-      } catch (error) {
-        console.error("Erro ao decodificar token:", error);
-        setUserRole("user");
-      }
-    }
-  };
 
   const login = async (user: AuthUserProps) => {
     let msgText = "Login realizado com sucesso";
 
     try {
-      const data = await api.post("/users/login", user).then((response) => {
-        return response.data;
-      });
-      await authUser(data);
+      const response = await api.post("/users/login", user);
+      const data = response.data;
+      
+      localStorage.setItem("seacamarao-token", JSON.stringify(data.token));
+      api.defaults.headers.Authorization = `Bearer ${data.token}`;
+      
+      const decoded = jwtDecode<DecodedToken>(data.token);
+      
+      setAuthenticated(true);
+      setIsAdmin(decoded.administrator || false);
+      
       toast.success(msgText);
       navigate("/");
     } catch (error) {
@@ -94,8 +91,9 @@ export default function useAuth() {
     delete api.defaults.headers.Authorization;
 
     setAuthenticated(false);
+    setIsAdmin(false)
     navigate("/", { replace: true });
   };
 
-  return { authenticated, loading, login, logout, userRole, isAdmin: userRole === "admin" };
+  return { authenticated, loading, login, logout, isAdmin };
 }

@@ -7,6 +7,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/login/Register";
 import Cart from "./pages/cart/Cart";
 import Dashboard from "./pages/restricted/Dashboard";
+import AccessDenied from "./pages/restricted/AccessDenied";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/restricted/dashboard" element={<Dashboard />} />
+        <Route path="/restricted/accessdenied" element={<AccessDenied />} />
       </Route>
     </Routes>
   );
