@@ -20,8 +20,8 @@ export const ProductCard = ({
   return (
     <section className="w-full p-3 bg-zinc-700 rounded-md drop-shadow-2xl">
       <img className="w-full" src={src} alt={name} />
-      <h2 className="text-xl text-zinc-200 text-center font-bold my-3">
-        {name}
+      <h2 className="text-zinc-200 text-center font-bold my-3">
+        {name.length > 24 ? `${name.slice(0, 27)}...` : name}
       </h2>
       <div className="flex items-center justify-between mb-3">
         <span className="text-zinc-200 font-semibold">
@@ -32,9 +32,9 @@ export const ProductCard = ({
           })}
         </span>
       </div>
-      <div className="text-zinc-200 flex items-center justify-between">
+      <div className="text-zinc-200 flex gap-2 flex-col sm:flex-row items-center justify-between">
         <Link className="text-orange-600" to={to}>
-          Mais detalhes...
+          Mais...
         </Link>
         <Button
           onClick={onClick}

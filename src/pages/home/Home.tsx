@@ -43,7 +43,7 @@ const Home = () => {
 
   return (
     <Productscontainer>
-      <div className="grid gap-10 mx-5 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-10 mx-5 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         {products.map((product) => (
           <ProductCard
             key={product._id}
