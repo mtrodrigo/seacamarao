@@ -67,7 +67,7 @@ const OrderHistory = () => {
                   <th className="px-2 py-1 text-center">Cliente</th>
                   <th className="px-2 py-1 text-center">Cidade</th>
                   <th className="px-2 py-1 text-center">Total</th>
-                  <th className="px-2 py-1 text-center">Atendido</th>
+                  <th className="px-2 py-1 text-center">Finalizado</th>
                   <th className="px-2 py-1 text-center"></th>
                 </tr>
               </thead>
@@ -97,7 +97,7 @@ const OrderHistory = () => {
                       <td className="px-2 py-1 text-center">{sale.attended ? <CheckIcon /> : ""}</td>
                       <td className="px-2 py-1">
                         <button
-                          onClick={() => navigate(`/orderdetails/${sale._id}`)}
+                          onClick={() => navigate(`/restricted/orderdetails/${sale._id}`)}
                         >
                           <AddIcon />
                         </button>

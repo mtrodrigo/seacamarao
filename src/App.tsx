@@ -9,6 +9,7 @@ import Cart from "./pages/cart/Cart";
 import Dashboard from "./pages/restricted/Dashboard";
 import AdminRoutes from "./routes/AdminRoutes";
 import OrderHistory from "./pages/restricted/OrderHistory";
+import OrderDetails from "./pages/restricted/OrderDetails";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route element={<AdminRoutes />}>
           <Route path="/restricted/dashboard" element={<Dashboard />} />
           <Route path="/restricted/orderhistory" element={<OrderHistory />} />
+          <Route path="/restricted/orderdetails/:id" element={<OrderDetails />} />
         </Route>
         
         

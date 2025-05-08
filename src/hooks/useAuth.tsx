@@ -44,7 +44,7 @@ export default function useAuth() {
       const parsedToken = JSON.parse(token);
       api.defaults.headers.Authorization = `Bearer ${parsedToken}`;
       setAuthenticated(true);
-      setIsAdmin(adminStatus); // Atualiza o estado imediatamente
+      setIsAdmin(adminStatus);
     } else {
       setAuthenticated(false);
       setIsAdmin(false);

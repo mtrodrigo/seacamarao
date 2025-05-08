@@ -121,7 +121,7 @@ const Dashboard = () => {
                       <td className="px-2 py-1">R$ {total.toFixed(2)}</td>
                       <td className="px-2 py-1">
                         <button
-                          onClick={() => navigate(`/order-details/${sale._id}`)}
+                          onClick={() => navigate(`/restricted/orderdetails/${sale._id}`)}
                         >
                           <AddIcon />
                         </button>

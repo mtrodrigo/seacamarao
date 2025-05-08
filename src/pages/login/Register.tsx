@@ -85,106 +85,129 @@ const Register = () => {
   return (
     <RegisterContainer>
       <h1 className="text-2xl text-zinc-200 font-bold">Registrar</h1>
-      <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit(registerUser)}>
+      <form
+        className="flex flex-col items-center justify-center"
+        onSubmit={handleSubmit(registerUser)}
+      >
         <div className="flex flex-col w-9/10 sm:flex-row gap-0 sm:gap-10">
           <div className="w-full">
-          <InputLoginRegister
-            label="Digite seu nome"
-            type="text"
-            name="name"
-            register={register}
-          />
-          <small className="text-red-500">{errors && errors.name?.message}</small>
+            <InputLoginRegister
+              label="Digite seu nome"
+              type="text"
+              name="name"
+              register={register}
+            />
+            <small className="text-red-500">
+              {errors && errors.name?.message}
+            </small>
           </div>
           <div className="w-full">
-          <InputLoginRegister
-            label="Digite seu e-mail"
-            type="email"
-            name="email"
-            register={register}
-          />
-          <small className="text-red-500">{errors && errors.email?.message}</small>
+            <InputLoginRegister
+              label="Digite seu e-mail"
+              type="email"
+              name="email"
+              register={register}
+            />
+            <small className="text-red-500">
+              {errors && errors.email?.message}
+            </small>
           </div>
         </div>
         <div className="flex flex-col w-9/10 sm:flex-row gap-0 sm:gap-10">
           <div className="w-full">
-          <InputLoginRegister
-            label="Digite sua senha"
-            type="password"
-            name="password"
-            register={register}
-          />
-          <small className="text-red-500">{errors && errors.password?.message}</small>
+            <InputLoginRegister
+              label="Digite sua senha"
+              type="password"
+              name="password"
+              register={register}
+            />
+            <small className="text-red-500">
+              {errors && errors.password?.message}
+            </small>
           </div>
           <div className="w-full">
-          <InputLoginRegister
-            label="Confirme sua senha"
-            type="password"
-            name="confirmpassword"
-            register={register}
-          />
-          <small className="text-red-500">{errors && errors.confirmpassword?.message}</small>
+            <InputLoginRegister
+              label="Confirme sua senha"
+              type="password"
+              name="confirmpassword"
+              register={register}
+            />
+            <small className="text-red-500">
+              {errors && errors.confirmpassword?.message}
+            </small>
           </div>
         </div>
         <div className="flex flex-col w-9/10 sm:flex-row gap-0 sm:gap-10">
           <div className="w-full">
-          <InputLoginRegister
-            label="CPF ou CNPJ"
-            type="text"
-            name="cpf_cnpj"
-            register={register}
-          />
-           <small className="text-red-500">{errors && errors.confirmpassword?.message}</small>
+            <InputLoginRegister
+              label="CPF ou CNPJ"
+              type="text"
+              name="cpf_cnpj"
+              register={register}
+            />
+            <small className="text-red-500">
+              {errors && errors.confirmpassword?.message}
+            </small>
           </div>
           <div className="w-full">
-          <InputLoginRegister
-            label="Digite seu CEP "
-            type="text"
-            name="cep"
-            onBlur={checkCep}
-            register={register}
-          />
-          <small className="text-red-500">{errors && errors.cep?.message}</small>
+            <InputLoginRegister
+              label="Digite seu CEP "
+              type="text"
+              name="cep"
+              onBlur={checkCep}
+              register={register}
+            />
+            <small className="text-red-500">
+              {errors && errors.cep?.message}
+            </small>
           </div>
         </div>
         <div className="flex flex-col w-9/10 sm:flex-row gap-0 sm:gap-10">
           <div className="w-full">
-          <InputLoginRegister
-            label="Digite seu endereço...Rua, Avenida, número"
-            type="text"
-            name="address"
-            register={register}
-          />
-          <small className="text-red-500">{errors && errors.address?.message}</small>
+            <InputLoginRegister
+              label="Digite seu endereço...Rua, Avenida, número"
+              type="text"
+              name="address"
+              register={register}
+            />
+            <small className="text-red-500">
+              {errors && errors.address?.message}
+            </small>
           </div>
         </div>
         <div className="flex flex-col w-9/10 sm:flex-row gap-0 sm:gap-10">
           <div className="w-full">
-          <InputLoginRegister
-            label="Cidade "
-            type="text"
-            name="city"
-            register={register}
-          />
-          <small className="text-red-500">{errors && errors.city?.message}</small>
+            <InputLoginRegister
+              label="Cidade "
+              type="text"
+              name="city"
+              register={register}
+            />
+            <small className="text-red-500">
+              {errors && errors.city?.message}
+            </small>
           </div>
           <div className="w-full">
-          <InputLoginRegister
-            label="Estado"
-            type="text"
-            name="state"
-            register={register}
-          />
-          <small className="text-red-500">{errors && errors.state?.message}</small>
+            <InputLoginRegister
+              label="Estado"
+              type="text"
+              name="state"
+              register={register}
+            />
+            <small className="text-red-500">
+              {errors && errors.state?.message}
+            </small>
           </div>
-          <div className="w-full"> 
-          <InputLoginRegister
-            label="Telefone"
-            type="text"
-            name="phone"
-            register={register}
-          />
-          <small className="text-red-500">{errors && errors.phone?.message}</small>
+          <div className="w-full">
+            <InputLoginRegister
+              label="Telefone"
+              type="text"
+              name="phone"
+              register={register}
+            />
+            <small className="text-red-500">
+              {errors && errors.phone?.message}
+            </small>
           </div>
         </div>
         <div className="flex items-center justify-center">

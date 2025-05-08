@@ -11,7 +11,7 @@ const AdminRoutes = () => {
     }
 
     if (!isAdmin) {
-        return <Navigate to="/restricted/dashboard" replace />
+        return <Navigate to="/" replace />
     }
 
     return <Outlet />
