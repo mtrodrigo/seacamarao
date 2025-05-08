@@ -7,8 +7,8 @@ import Login from "./pages/login/Login";
 import Register from "./pages/login/Register";
 import Cart from "./pages/cart/Cart";
 import Dashboard from "./pages/restricted/Dashboard";
-import AccessDenied from "./pages/restricted/AccessDenied";
 import AdminRoutes from "./routes/AdminRoutes";
+import OrderHistory from "./pages/restricted/OrderHistory";
 
 function App() {
   return (
@@ -20,10 +20,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/restricted/accessdenied" element={<AccessDenied />} />
                
         <Route element={<AdminRoutes />}>
           <Route path="/restricted/dashboard" element={<Dashboard />} />
+          <Route path="/restricted/orderhistory" element={<OrderHistory />} />
         </Route>
         
         

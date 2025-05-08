@@ -21,6 +21,7 @@ const schema = z.object({
     .string()
     .min(11, "CPF ou CNPJ apenas números")
     .max(14, "CPF ou CNPJ apenas números"),
+  cep: z.string().nonempty("CEP é obrigatório"),
   address: z.string().nonempty("Endereço é obrigatório"),
   city: z.string().nonempty("Cidade é obrigatório"),
   state: z.string().nonempty("Estado é obrigatório"),
@@ -86,41 +87,56 @@ const Register = () => {
       <h1 className="text-2xl text-zinc-200 font-bold">Registrar</h1>
       <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit(registerUser)}>
         <div className="flex flex-col w-9/10 sm:flex-row gap-0 sm:gap-10">
+          <div className="w-full">
           <InputLoginRegister
             label="Digite seu nome"
             type="text"
             name="name"
             register={register}
-            error={errors.name?.message}
           />
+          <small className="text-red-500">{errors && errors.name?.message}</small>
+          </div>
+          <div className="w-full">
           <InputLoginRegister
             label="Digite seu e-mail"
             type="email"
             name="email"
             register={register}
           />
+          <small className="text-red-500">{errors && errors.email?.message}</small>
+          </div>
         </div>
         <div className="flex flex-col w-9/10 sm:flex-row gap-0 sm:gap-10">
+          <div className="w-full">
           <InputLoginRegister
             label="Digite sua senha"
             type="password"
             name="password"
             register={register}
           />
+          <small className="text-red-500">{errors && errors.password?.message}</small>
+          </div>
+          <div className="w-full">
           <InputLoginRegister
             label="Confirme sua senha"
             type="password"
             name="confirmpassword"
             register={register}
           />
+          <small className="text-red-500">{errors && errors.confirmpassword?.message}</small>
+          </div>
         </div>
         <div className="flex flex-col w-9/10 sm:flex-row gap-0 sm:gap-10">
+          <div className="w-full">
           <InputLoginRegister
             label="CPF ou CNPJ"
             type="text"
             name="cpf_cnpj"
             register={register}
           />
+           <small className="text-red-500">{errors && errors.confirmpassword?.message}</small>
+          </div>
+          <div className="w-full">
           <InputLoginRegister
             label="Digite seu CEP "
             type="text"
@@ -128,34 +144,48 @@ const Register = () => {
             onBlur={checkCep}
             register={register}
           />
+          <small className="text-red-500">{errors && errors.cep?.message}</small>
+          </div>
         </div>
         <div className="flex flex-col w-9/10 sm:flex-row gap-0 sm:gap-10">
+          <div className="w-full">
           <InputLoginRegister
             label="Digite seu endereço...Rua, Avenida, número"
             type="text"
             name="address"
             register={register}
           />
+          <small className="text-red-500">{errors && errors.address?.message}</small>
+          </div>
         </div>
         <div className="flex flex-col w-9/10 sm:flex-row gap-0 sm:gap-10">
+          <div className="w-full">
           <InputLoginRegister
             label="Cidade "
             type="text"
             name="city"
             register={register}
           />
+          <small className="text-red-500">{errors && errors.city?.message}</small>
+          </div>
+          <div className="w-full">
           <InputLoginRegister
             label="Estado"
             type="text"
             name="state"
             register={register}
           />
+          <small className="text-red-500">{errors && errors.state?.message}</small>
+          </div>
+          <div className="w-full"> 
           <InputLoginRegister
             label="Telefone"
             type="text"
             name="phone"
             register={register}
           />
+          <small className="text-red-500">{errors && errors.phone?.message}</small>
+          </div>
         </div>
         <div className="flex items-center justify-center">
           {isLoading ? (

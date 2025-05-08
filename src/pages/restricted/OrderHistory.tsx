@@ -5,36 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import api from "../../utils/api";
 import AddIcon from "@mui/icons-material/Add";
+import { Sale } from "./Dashboard";
+import CheckIcon from '@mui/icons-material/Check';
 
-interface Product {
-  _id: string;
-  code: string;
-  name: string;
-  price: number;
-  quantity: number;
-}
-
-interface User {
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-  city: string;
-  state: string;
-  cpf_cnpj: string;
-}
-
-export interface Sale {
-  _id: string;
-  user: User;
-  products: Product[];
-  attended: boolean;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-}
-
-const Dashboard = () => {
+const OrderHistory = () => {
   const [loading, setLoading] = useState(true);
   const [sales, setSales] = useState<Sale[]>([]);
   const [token] = useState(localStorage.getItem("seacamarao-token"));
@@ -54,6 +28,7 @@ const Dashboard = () => {
       .catch((error) => {
         console.error(error);
         setLoading(false);
+        navigate("/login")
       });
   }, [token]);
 
@@ -67,16 +42,11 @@ const Dashboard = () => {
     );
   }
 
-  const pendingSales = sales.filter((sale) => !sale.attended);
-
   return (
     <RegisterContainer>
-      <h1 className="text-2xl text-zinc-200 mb-5">Dashboard</h1>
-      <div className="flex flex-wrap items-center justify-center gap-3 mb-5">
-        <HeaderBottom to="/" text="Cadastrar produtos" />
-        <HeaderBottom to="/" text="Editar produtos" />
-        <HeaderBottom to="/" text="Usuários cadastrados" />
-        <HeaderBottom to="/restricted/orderhistory" text="Histórico completo" />
+      <h1 className="text-2xl text-zinc-200 mb-5">Todos pedidos</h1>
+      <div className="flex w-full items-center justify-start mb-5">
+        <HeaderBottom to="/restricted/dashboard" text="Voltar" />
       </div>
 
       <div>
@@ -84,7 +54,7 @@ const Dashboard = () => {
           Histórico de pedidos não atendidos
         </h2>
 
-        {pendingSales.length === 0 ? (
+        {sales.length === 0 ? (
           <div className="text-center text-zinc-200">
             Nenhum pedido pendente no momento.
           </div>
@@ -97,15 +67,20 @@ const Dashboard = () => {
                   <th className="px-2 py-1 text-center">Cliente</th>
                   <th className="px-2 py-1 text-center">Cidade</th>
                   <th className="px-2 py-1 text-center">Total</th>
+                  <th className="px-2 py-1 text-center">Atendido</th>
                   <th className="px-2 py-1 text-center"></th>
                 </tr>
               </thead>
               <tbody>
-                {pendingSales.map((sale) => {
+                {sales.map((sale) => {
                   const total = sale.products.reduce(
                     (sum, product) => sum + product.price * product.quantity,
                     0
                   );
+                  const totalFormated = total.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })
                   const saleDate = new Date(sale.createdAt).toLocaleDateString(
                     "pt-BR"
                   );
@@ -118,10 +93,11 @@ const Dashboard = () => {
                       <td className="px-2 py-1">{saleDate}</td>
                       <td className="px-2 py-1">{sale.user.name}</td>
                       <td className="px-2 py-1">{sale.user.city}</td>
-                      <td className="px-2 py-1">R$ {total.toFixed(2)}</td>
+                      <td className="px-2 py-1">{totalFormated}</td>
+                      <td className="px-2 py-1 text-center">{sale.attended ? <CheckIcon /> : ""}</td>
                       <td className="px-2 py-1">
                         <button
-                          onClick={() => navigate(`/order-details/${sale._id}`)}
+                          onClick={() => navigate(`/orderdetails/${sale._id}`)}
                         >
                           <AddIcon />
                         </button>
@@ -138,4 +114,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default OrderHistory;

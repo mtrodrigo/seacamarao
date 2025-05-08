@@ -31,7 +31,7 @@ export const InputLoginRegister = ({
   };
 
   return (
-    <div className="mt-3" style={{ width: "100%" }}>
+    <div className="mt-3 w-full">
       <TextField
         label={error ? error : label}
         variant="standard"
