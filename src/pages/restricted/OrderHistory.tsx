@@ -94,7 +94,7 @@ const OrderHistory = () => {
                       <td className="px-2 py-1">{sale.user.name}</td>
                       <td className="px-2 py-1">{sale.user.city}</td>
                       <td className="px-2 py-1">{totalFormated}</td>
-                      <td className="px-2 py-1 text-center">{sale.attended ? <CheckIcon /> : ""}</td>
+                      <td className="px-2 py-1 text-center text-green-500">{sale.attended ? <CheckIcon /> : ""}</td>
                       <td className="px-2 py-1">
                         <button
                           onClick={() => navigate(`/restricted/orderdetails/${sale._id}`)}

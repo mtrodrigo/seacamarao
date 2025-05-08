@@ -12,6 +12,7 @@ const OrderDetails = () => {
   const [token] = useState(localStorage.getItem("seacamarao-token"));
   const [sale, setSale] = useState<Sale | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [attended, setAttended] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,6 +42,24 @@ const OrderDetails = () => {
     }
   }, []);
 
+    const handleAttended = async () => {
+        try {
+            await api.patch(`sales/updateAttended/${id}`, {
+                attended: true
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token ? JSON.parse(token) : ""}`,
+                },
+            });
+            setAttended(true);
+            toast.success("Pedido finalizado com sucesso");
+        } catch (error) {
+            console.error("Error: ", error);
+            toast.error("Erro ao finalizar o pedido");
+        }
+    }
+
+
   const saleDate = sale?.createdAt
     ? new Date(sale.createdAt).toLocaleDateString("pt-BR")
     : "Data não disponível";
@@ -60,10 +79,13 @@ const OrderDetails = () => {
       <div className="flex w-full items-center justify-start mb-5">
         <HeaderBottom to="/restricted/dashboard" text="Voltar" />
       </div>
-      {sale && sale.attended ? (
+      {attended ? (
         <h2 className="text-xl text-green-500 mb-3">Finalizado</h2>
       ) : (
-        <h2 className="text-xl text-red-500 mb-3">Não finalizado</h2>
+        <div className="flex gap-5 items-center justify-center mb-5">
+          <h2 className="text-xl text-red-500">Não finalizado</h2>
+          <HeaderBottom to="#" onClick={handleAttended} text="Finalizar pedido" />
+        </div>
       )}
       <h1 className="text-zinc-200 text-2xl">Pedido: {sale && sale._id}</h1>
       <h2 className="text-zinc-200 text-xl mb-3">
@@ -139,11 +161,6 @@ const OrderDetails = () => {
           </tr>
         </tbody>
       </table>
-      {!sale?.attended && (
-        <div className="flex mt-8">
-          <HeaderBottom to="#" text="Finalizar pedido" />
-        </div>
-      )}
     </RegisterContainer>
   );
 };
