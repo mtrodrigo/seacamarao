@@ -11,6 +11,8 @@ import AdminRoutes from "./routes/AdminRoutes";
 import OrderHistory from "./pages/restricted/OrderHistory";
 import OrderDetails from "./pages/restricted/OrderDetails";
 import ProductRegister from "./pages/restricted/products/ProductRegister";
+import ShowProducts from "./pages/restricted/products/ShowProducts";
+import EditProduct from "./pages/restricted/products/EditProduct";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
           <Route path="/restricted/orderhistory" element={<OrderHistory />} />
           <Route path="/restricted/orderdetails/:id" element={<OrderDetails />} />
           <Route path="/restricted/products/register" element={<ProductRegister />} />
+          <Route path="/restricted/products/showproducts" element={<ShowProducts />} />
+          <Route path="/restricted/products/editproduct/:id" element={<EditProduct />} />
         </Route>
         
         

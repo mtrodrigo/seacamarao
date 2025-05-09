@@ -61,7 +61,7 @@ const Home = () => {
 
   return (
     <Productscontainer>
-      <div className="mb-8 mx-5">
+      <div className="mb-8">
         <TextField
           fullWidth
           variant="outlined"
@@ -91,28 +91,19 @@ const Home = () => {
               },
             },
           }}
-          InputLabelProps={{
-            style: { color: "#e4e4e7" },
-          }}
         />
       </div>
       <div className="grid gap-10 mx-5 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
-            <ProductCard
-              key={product._id}
-              src={product.image}
-              name={product.name}
-              price={product.price}
-              onClick={() => handleAddItem(product)}
-              to={`/details/${product._id}`}
-            />
-          ))
-        ) : (
-          <div className="col-span-full text-center text-zinc-200 py-10">
-            Nenhum produto encontrado para "{searchTerm}"
-          </div>
-        )}
+        {filteredProducts.map((product) => (
+          <ProductCard
+            key={product._id}
+            src={product.image}
+            name={product.name}
+            price={product.price}
+            onClick={() => handleAddItem(product)}
+            to={`/details/${product._id}`}
+          />
+        ))}
       </div>
     </Productscontainer>
   );

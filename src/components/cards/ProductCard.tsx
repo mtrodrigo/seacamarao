@@ -18,7 +18,7 @@ export const ProductCard = ({
   onClick,
 }: ProductCardProps) => {
   return (
-    <section className="w-full p-3 bg-zinc-700 rounded-md drop-shadow-2xl">
+    <section className="flex flex-col justify-between w-full p-3 bg-zinc-700 rounded-md drop-shadow-2xl">
       <img className="w-full" src={src} alt={name} />
       <h2 className="text-zinc-200 text-center font-bold my-3">
         {name.length > 24 ? `${name.slice(0, 27)}...` : name}

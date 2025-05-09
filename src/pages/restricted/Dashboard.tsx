@@ -74,7 +74,7 @@ const Dashboard = () => {
       <h1 className="text-2xl text-zinc-200 mb-5">Dashboard</h1>
       <div className="flex flex-wrap items-center justify-center gap-3 mb-5">
         <HeaderBottom to="/restricted/products/register" text="Cadastro produtos" />
-        <HeaderBottom to="/" text="Editar produtos" />
+        <HeaderBottom to="/restricted/products/showproducts" text="Editar produtos" />
         <HeaderBottom to="/" text="Usuários cadastrados" />
         <HeaderBottom to="/restricted/orderhistory" text="Histórico completo" />
       </div>

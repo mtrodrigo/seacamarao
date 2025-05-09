@@ -11,7 +11,7 @@ import { CircularProgress } from "@mui/material";
 import api from "../../../utils/api";
 import toast from "react-hot-toast";
 
-const schema = z.object({
+export const schema = z.object({
   image: z.instanceof(File, { message: "A imagem é obrigatória" }),
   name: z.string().min(1, "O nome é obrigatório"),
   code: z.string().min(1, "O código é obrigatório"),
@@ -146,12 +146,16 @@ const ProductRegister = () => {
             <small className="text-red-500">{errors.price?.message}</small>
           </div>
         </div>
-        <InputLoginRegister
-          label="Descrição do produto"
-          type="text"
-          name="description"
-          register={register}
-        />
+        <div className="flex flex-col w-full">
+          <label htmlFor="description" className="text-zinc-200 text-sm mb-1">
+            Descrição do produto
+          </label>
+          <textarea
+            className="w-full p-2 rounded-lg bg-zinc-800 text-zinc-200 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-orange-600"
+            rows={4}
+            {...register("description")}
+          />
+        </div>
         <small className="text-red-500">{errors.description?.message}</small>
         <div className="flex items-center justify-center mt-5">
           {loading ? (
@@ -159,7 +163,7 @@ const ProductRegister = () => {
               <CircularProgress size={18} sx={{ color: "#e4e4e7" }} />
             </div>
           ) : (
-            <LoginRegisterButton text="Entrar" />
+            <LoginRegisterButton text="Cadastrar" />
           )}
         </div>
       </form>
