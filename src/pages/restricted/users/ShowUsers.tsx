@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
-interface User {
+export interface User {
   _id: string;
   name: string;
   email: string;
@@ -17,8 +17,6 @@ interface User {
   state: string;
   phone: string;
   administrator: boolean;
-  createdAt: string;
-  updatedAt: string;
 }
 
 const ShowUsers = () => {
@@ -99,7 +97,7 @@ const ShowUsers = () => {
               <td className="px-2 py-2">{user.cpf_cnpj}</td>
               <td className="px-2 py-2">{user.city}</td>
               <td className="px-2 py-2">{user.administrator ? "Sim" : ""}</td>
-              <Link to="#">
+              <Link to={`/restricted/users/userdetails/${user._id}`}>
                 <AddIcon />
               </Link>
             </tr>

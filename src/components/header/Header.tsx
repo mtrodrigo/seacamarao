@@ -207,7 +207,7 @@ export const Header = () => {
               <HeaderBottom
                 to="/cart"
                 onClick={toggleCart(false)}
-                text="Finalizar compra"
+                text="Exibir pedido"
               />
             </>
           )}

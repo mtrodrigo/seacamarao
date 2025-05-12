@@ -12,7 +12,6 @@ const OrderDetails = () => {
   const [token] = useState(localStorage.getItem("seacamarao-token"));
   const [sale, setSale] = useState<Sale | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [attended, setAttended] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,15 +43,15 @@ const OrderDetails = () => {
 
     const handleAttended = async () => {
         try {
-            await api.patch(`sales/updateAttended/${id}`, {
+            await api.patch(`/sales/updateAttended/${id}`, {
                 attended: true
             }, {
                 headers: {
                     Authorization: `Bearer ${token ? JSON.parse(token) : ""}`,
                 },
             });
-            setAttended(true);
             toast.success("Pedido finalizado com sucesso");
+            navigate("/restricted/orderhistory")
         } catch (error) {
             console.error("Error: ", error);
             toast.error("Erro ao finalizar o pedido");
@@ -77,9 +76,9 @@ const OrderDetails = () => {
   return (
     <RegisterContainer>
       <div className="flex w-full items-center justify-start mb-5">
-        <HeaderBottom to="/restricted/dashboard" text="Voltar" />
+        <HeaderBottom to="/restricted/orderhistory" text="Voltar" />
       </div>
-      {attended ? (
+      {sale?.attended ? (
         <h2 className="text-xl text-green-500 mb-3">Finalizado</h2>
       ) : (
         <div className="flex gap-5 items-center justify-center mb-5">
