@@ -56,11 +56,7 @@ const EditProduct = () => {
 
   useEffect(() => {
     const token = getAuthToken();
-    if (!token) {
-      toast.error("Sessão expirada. Faça login novamente.");
-      navigate("/login");
-      return;
-    }
+    
 
     const fetchProduct = async () => {
       try {

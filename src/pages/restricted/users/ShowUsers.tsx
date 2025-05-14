@@ -97,9 +97,11 @@ const ShowUsers = () => {
               <td className="px-2 py-2">{user.cpf_cnpj}</td>
               <td className="px-2 py-2">{user.city}</td>
               <td className="px-2 py-2">{user.administrator ? "Sim" : ""}</td>
-              <Link to={`/restricted/users/userdetails/${user._id}`}>
-                <AddIcon />
-              </Link>
+              <td className="px-2 py-2">
+                <Link to={`/restricted/users/userdetails/${user._id}`}>
+                  <AddIcon />
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>
