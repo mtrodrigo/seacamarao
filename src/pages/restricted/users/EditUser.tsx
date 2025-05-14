@@ -132,7 +132,10 @@ const EditUser = () => {
   return (
     <RegisterContainer>
       <div className="flex w-full items-center justify-start">
-        <HeaderBottom to={`/restricted/users/userdetails/${id}`} text="Voltar" />
+        <HeaderBottom
+          to={`/restricted/users/userdetails/${id}`}
+          text="Voltar"
+        />
       </div>
       <h1 className="text-2xl text-zinc-200 font-bold">Editar usuário</h1>
       <form
