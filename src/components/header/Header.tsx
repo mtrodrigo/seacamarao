@@ -72,7 +72,7 @@ export const Header = () => {
           </Box>
           <Box
             sx={{
-              display: { xs: "none", sm: "flex" },
+              display: { xs: "none", md: "flex" },
               gap: 3,
               alignItems: "center",
             }}
@@ -80,7 +80,15 @@ export const Header = () => {
             <HeaderBottom to="/" text="Produtos" />
             <HeaderBottom to="/about" text="Sobre" />
             {authenticated ? (
-              <HeaderBottom to="#" onClick={logout} text="Sair" />
+              <>
+                {authenticated && !isAdmin && (
+                  <HeaderBottom
+                    to="/restricted/sales/mysales"
+                    text="Meus Pedidos"
+                  />
+                )}
+                <HeaderBottom to="#" onClick={logout} text="Sair" />
+              </>
             ) : (
               <HeaderBottom to="/login" text="Login" />
             )}
@@ -103,7 +111,7 @@ export const Header = () => {
             )}
           </Box>
           <Box
-            sx={{ display: { xs: "flex", sm: "none" }, alignItems: "center" }}
+            sx={{ display: { xs: "flex", md: "none" }, alignItems: "center" }}
           >
             <IconButton
               edge="start"
@@ -138,6 +146,14 @@ export const Header = () => {
               </MenuItem>
               <MenuItem onClick={handleMenuClose}>
                 <HeaderBottom to="/about" text="Sobre" />
+              </MenuItem>
+              <MenuItem>
+                {authenticated && !isAdmin && (
+                  <HeaderBottom
+                    to="/restricted/sales/mysales"
+                    text="Meus Pedidos"
+                  />
+                )}
               </MenuItem>
               <MenuItem>
                 {authenticated ? (
