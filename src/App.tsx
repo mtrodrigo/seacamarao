@@ -16,6 +16,8 @@ import EditProduct from "./pages/restricted/products/EditProduct";
 import ShowUsers from "./pages/restricted/users/ShowUsers";
 import UserDetails from "./pages/restricted/users/UserDetails";
 import EditUser from "./pages/restricted/users/EditUser";
+import AuthenticatedRoutes from "./routes/AuthenticatedRoutes";
+import MySales from "./pages/restricted/sales/Mysales";
 
 function App() {
   return (
@@ -27,20 +29,37 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/cart" element={<Cart />} />
-               
+
         <Route element={<AdminRoutes />}>
           <Route path="/restricted/dashboard" element={<Dashboard />} />
           <Route path="/restricted/orderhistory" element={<OrderHistory />} />
-          <Route path="/restricted/orderdetails/:id" element={<OrderDetails />} />
-          <Route path="/restricted/products/register" element={<ProductRegister />} />
-          <Route path="/restricted/products/showproducts" element={<ShowProducts />} />
-          <Route path="/restricted/products/editproduct/:id" element={<EditProduct />} />
+          <Route
+            path="/restricted/orderdetails/:id"
+            element={<OrderDetails />}
+          />
+          <Route
+            path="/restricted/products/register"
+            element={<ProductRegister />}
+          />
+          <Route
+            path="/restricted/products/showproducts"
+            element={<ShowProducts />}
+          />
+          <Route
+            path="/restricted/products/editproduct/:id"
+            element={<EditProduct />}
+          />
           <Route path="/restricted/users/showusers" element={<ShowUsers />} />
-          <Route path="/restricted/users/userdetails/:id" element={<UserDetails />} />
+          <Route
+            path="/restricted/users/userdetails/:id"
+            element={<UserDetails />}
+          />
           <Route path="/restricted/users/edituser/:id" element={<EditUser />} />
         </Route>
-        
-        
+
+        <Route element={<AuthenticatedRoutes />}>
+          <Route path="/restricted/sales/mysales" element={<MySales />} />
+        </Route>
       </Route>
     </Routes>
   );
