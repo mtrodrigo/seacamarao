@@ -15,6 +15,7 @@ import ShowProducts from "./pages/restricted/products/ShowProducts";
 import EditProduct from "./pages/restricted/products/EditProduct";
 import ShowUsers from "./pages/restricted/users/ShowUsers";
 import UserDetails from "./pages/restricted/users/UserDetails";
+import EditUser from "./pages/restricted/users/EditUser";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/restricted/products/editproduct/:id" element={<EditProduct />} />
           <Route path="/restricted/users/showusers" element={<ShowUsers />} />
           <Route path="/restricted/users/userdetails/:id" element={<UserDetails />} />
+          <Route path="/restricted/users/edituser/:id" element={<EditUser />} />
         </Route>
         
         

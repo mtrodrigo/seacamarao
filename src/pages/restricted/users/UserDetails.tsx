@@ -70,7 +70,7 @@ const UserDetails = () => {
         <p>Telefone: {user?.phone}</p>
       </div>
       <div className="flex mt-5">
-        <HeaderBottom to={``} text="Editar" />
+        <HeaderBottom to={`/restricted/users/edituser/${id}`} text="Editar" />
       </div>
     </RegisterContainer>
   );
