@@ -16,7 +16,7 @@ import { HeaderBottom } from "../buttons/HeaderBottom";
 import { CartContext } from "../../contexts/CartContext";
 import { Context } from "../../contexts/UserContext";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
