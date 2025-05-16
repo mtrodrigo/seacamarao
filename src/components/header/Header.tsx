@@ -191,8 +191,12 @@ export const Header = () => {
           "& .MuiDrawer-paper": {
             backgroundColor: "#1e293b",
             color: "white",
-            width: 400,
-          },
+            width: 300,
+            "@media (max-width: 600px)": {
+              width: 250,
+              fontSize: "0.875rem"
+            }
+          }
         }}
       >
         <Box sx={{ padding: 2 }}>

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://seacamarao-api.vercel.app/",
   headers: {
     "Content-Type": "application/json",
   },
