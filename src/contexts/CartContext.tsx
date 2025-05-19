@@ -6,6 +6,7 @@ interface CartContextData {
   cartAmount: number;
   addItemCart: (newItem: ProductsProps) => void;
   removeItemCart: (product: CartProps) => void;
+  clearCart: () => void;
   total: string;
 }
 
@@ -82,6 +83,11 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     setCart(removeItem);
   };
 
+  const clearCart = () => {
+    setCart([]);
+    localStorage.removeItem("seacamarao-cart");
+  };
+
   const totalResultCart = (items: CartProps[]) => {
     const result = items.reduce((acc, obj) => acc + obj.total, 0);
     setTotal(
@@ -99,6 +105,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         cartAmount: cart.length,
         addItemCart,
         removeItemCart,
+        clearCart,
         total,
       }}
     >

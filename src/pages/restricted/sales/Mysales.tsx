@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import api from "../../../utils/api";
 import { CircularProgress } from "@mui/material";
+import { HeaderBottom } from "../../../components/buttons/HeaderBottom";
 
 const MySales = () => {
   const [loading, setLoading] = useState(true);
@@ -70,6 +71,9 @@ const MySales = () => {
 
   return (
     <RegisterContainer>
+      <div className="flex w-full items-center justify-start mb-5">
+        <HeaderBottom to="/restricted/orderhistory" text="Voltar" />
+      </div>
       <h1 className="text-2xl font-bold mb-6 text-zinc-100">Meus pedidos</h1>
 
       {sales.length === 0 ? (
@@ -81,12 +85,18 @@ const MySales = () => {
           <table className="w-full rounded-lg overflow-hidden border border-zinc-700 text-xs sm:text-base">
             <thead className="bg-zinc-800">
               <tr>
-                <th className="py-2 px-1 sm:px-2 text-left text-zinc-300">Data</th>
-                <th className="py-2 px-1 sm:px-2 text-left text-zinc-300">Código</th>
+                <th className="py-2 px-1 sm:px-2 text-left text-zinc-300">
+                  Data
+                </th>
+                <th className="py-2 px-1 sm:px-2 text-left text-zinc-300">
+                  Código
+                </th>
                 <th className="py-2 px-1 sm:px-2 text-left text-zinc-300">
                   Valor Total
                 </th>
-                <th className="py-2 px-1 sm:px-2 text-left text-zinc-300">Status</th>
+                <th className="py-2 px-1 sm:px-2 text-left text-zinc-300">
+                  Status
+                </th>
                 <th className="py-2 px-1 sm:px-2 text-left text-zinc-300"></th>
               </tr>
             </thead>
@@ -97,7 +107,9 @@ const MySales = () => {
                     key={sale._id}
                     className="hover:bg-zinc-800/50 bg-zinc-900 text-zinc-200 cursor-pointer"
                   >
-                    <td className="py-2 px-1 sm:px-2">{formatDate(sale.createdAt)}</td>
+                    <td className="py-2 px-1 sm:px-2">
+                      {formatDate(sale.createdAt)}
+                    </td>
                     <td className="py-2 px-1 sm:px-2 font-mono">
                       {sale._id.substring(0, 8).toUpperCase()}
                     </td>

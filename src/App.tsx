@@ -28,7 +28,6 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/cart" element={<Cart />} />
 
         <Route element={<AdminRoutes />}>
           <Route path="/restricted/dashboard" element={<Dashboard />} />
@@ -59,6 +58,7 @@ function App() {
 
         <Route element={<AuthenticatedRoutes />}>
           <Route path="/restricted/sales/mysales" element={<MySales />} />
+          <Route path="/cart" element={<Cart />} />
         </Route>
       </Route>
     </Routes>
