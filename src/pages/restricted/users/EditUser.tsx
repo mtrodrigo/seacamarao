@@ -31,7 +31,6 @@ const schema = z.object({
   administrator: z.boolean(),
 });
 
-// Define the type for our form data
 type FormData = z.infer<typeof schema>;
 
 const EditUser = () => {
@@ -114,6 +113,24 @@ const EditUser = () => {
     } catch (error) {
       console.error("Error: ", error);
       toast.error("Erro ao editar o usuário");
+    } finally {
+      setLoading((prev) => ({ ...prev, submit: false }));
+    }
+  };
+
+  const deleteUser = async () => {
+    setLoading((prev) => ({ ...prev, submit: true }));
+    try {
+      await api.delete(`/users/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token ? JSON.parse(token) : ""}`,
+        },
+      });
+      toast.success("Usuário apagado com sucesso");
+      navigate("/restricted/users/showusers");
+    } catch (error) {
+      console.error("Error: ", error);
+      toast.error("Erro ao apagar usuário");
     } finally {
       setLoading((prev) => ({ ...prev, submit: false }));
     }
@@ -262,7 +279,7 @@ const EditUser = () => {
             </div>
           ) : (
             <Button
-              onClick={() => {}}
+              onClick={deleteUser}
               variant="outlined"
               color="warning"
               startIcon={<DeleteIcon />}
