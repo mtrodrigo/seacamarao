@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import { HeaderBottom } from "../../../components/buttons/HeaderBottom";
 
 export interface User {
   _id: string;
@@ -74,6 +75,9 @@ const ShowUsers = () => {
 
   return (
     <RegisterContainer>
+      <div className="flex w-full items-center justify-start">
+        <HeaderBottom to="/restricted/dashboard" text="Voltar" />
+      </div>
       <h1 className="text-2xl text-zinc-200 font-bold mb-5">
         Usuários cadastrados
       </h1>
