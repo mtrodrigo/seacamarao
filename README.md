@@ -1,5 +1,8 @@
 # 🦐 Sea Camarão - E-commerce
 
+## 🌐 Site do Projeto
+[Visite o Sea Camarão Online](https://seacamarao.vercel.app/)
+
 ## 📋 Sobre o Projeto
 
 Plataforma de e-commerce completa para venda de frutos do mar online, oferecendo uma experiência de compra intuitiva para clientes e funcionalidades robustas de gerenciamento para administradores.
